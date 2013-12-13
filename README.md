@@ -1,4 +1,4 @@
 project-euler
 =============
 
-My Project Euler challenge solutions.
+My Project Euler challenge solutions (or attempts)..
