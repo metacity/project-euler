@@ -7,7 +7,7 @@ public class p27 {
 	private static final ExecutorService pool = Executors.newCachedThreadPool();
 	
 	private static int maxNumberOfPrimes = 0;
-    private static Quadratic maxPrimeFormula = new Quadratic(0, 0, 0);
+	private static Quadratic maxPrimeFormula = new Quadratic(0, 0, 0);
 
 	public static void main(String[] args) throws InterruptedException {
 		setupThreads();
@@ -21,14 +21,14 @@ public class p27 {
 	}
 	
 	 private static final void setupThreads() {
-       System.out.println("Computing with " + THREADS + " threads...");
-        for (int i = 0; i < THREADS; ++i) {
-            pool.execute(new Runnable() {
-                public void run() {
-                    try {
-                        while (true) {
-                            final Quadratic formula = queue.take();
-                            if (formula.isLast()) {
+	   System.out.println("Computing with " + THREADS + " threads...");
+		for (int i = 0; i < THREADS; ++i) {
+			pool.execute(new Runnable() {
+				public void run() {
+					try {
+						while (true) {
+							final Quadratic formula = queue.take();
+							if (formula.isLast()) {
 								System.out.println("Got to the last...");
 								System.out.println(maxPrimeFormula.a + "  " + maxPrimeFormula.b);
 								System.exit(0);
@@ -36,16 +36,16 @@ public class p27 {
 								int numberOfConsePrimes = getNumberOfConsecutivePrimes(formula);
 								checkAndSet(numberOfConsePrimes, formula);
 							}
-                        }
-                    } catch (InterruptedException iex) {
-                        System.out.println(iex.toString());
-                    }
-                }
-            });
-        
-        }
-    
-    }
+						}
+					} catch (InterruptedException iex) {
+						System.out.println(iex.toString());
+					}
+				}
+			});
+		
+		}
+	
+	}
 	
 	private static final int getNumberOfConsecutivePrimes(Quadratic formula) {
 		int numberOfPrimes = 0;
