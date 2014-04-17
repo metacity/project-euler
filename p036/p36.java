@@ -1,13 +1,14 @@
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class p36 {
 
 	public static void main(String[] args) {
-		int sum = IntStream.iterate(1, n -> n + 1)
-				.limit(1_000_000)
+		long start = System.nanoTime();
+		long sum = LongStream.rangeClosed(1, 200_000_000)
 				.parallel()
-				.filter(n -> isPalindrome(Integer.toString(n)) && isPalindrome(Integer.toBinaryString(n)))
+				.filter(n -> isPalindrome(Long.toString(n)) && isPalindrome(Long.toBinaryString(n)))
 				.sum();
+		System.out.println("Time: " + (System.nanoTime() - start)/1e6 + " ms");
 		System.out.println("Sum: " + sum);
 	}
 	
